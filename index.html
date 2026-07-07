@@ -355,22 +355,64 @@
             opacity: 0.8;
         }
 
-        /* Comments section */
-        .comments-section {
-            margin: 35px 0 25px 0;
-            padding: 25px;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(45, 74, 62, 0.08);
+        /* Anmälan section */
+        .anmalan-section {
+            margin: 40px 0;
         }
 
-        .comments-section h2 {
-            font-size: 1.3rem;
+        .anmalan-section h2 {
+            font-size: 1.5rem;
             font-weight: 600;
             color: var(--forest-dark);
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             text-align: center;
             letter-spacing: 1px;
+        }
+
+        .anmalan-intro {
+            font-size: 0.95rem;
+            color: var(--stone-gray);
+            text-align: center;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        .form-container {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 16px rgba(45, 74, 62, 0.1);
+            overflow: hidden;
+        }
+
+        .form-container iframe {
+            border: none;
+            width: 100%;
+            min-height: 1691px;
+        }
+
+        /* Contact section */
+        .contact-section {
+            margin: 35px 0 25px 0;
+            padding: 25px;
+            background: rgba(107, 142, 107, 0.05);
+            border-radius: 8px;
+            border: 1px solid var(--mist-gray);
+            text-align: center;
+        }
+
+        .contact-section h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--forest-dark);
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+
+        .contact-section p {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: var(--stone-gray);
         }
 
         /* Footer */
@@ -564,33 +606,19 @@
                 </section>
             </main>
 
-            <!-- Links (Nedtonade) -->
-            <section class="links-section">
-                <h3>Anmälan & Mer</h3>
-                <div class="link-buttons">
-                    <a href="#anmalan" class="link-btn">Anmäl dig här</a>
-                    <a href="#bilder" class="link-btn secondary">Ladda upp bilder</a>
+            <!-- Anmälan -->
+            <section class="anmalan-section" id="anmalan">
+                <h2>📝 Anmälan till Blixtbäckvarvet 2026</h2>
+                <p class="anmalan-intro">Anmäl dig genom att fylla i formuläret nedan. Dina preliminära starttider uppdateras 3 dagar före loppet.</p>
+                <div class="form-container">
+                    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSf5Hfx3vCAL-C9vK7OReQQSGSg-SFzYwQy1-9ULP5hUGf8LzQ/viewform?embedded=true" width="100%" height="1691" frameborder="0" marginheight="0" marginwidth="0">Läser in …</iframe>
                 </div>
             </section>
 
-            <!-- Kommentarer -->
-            <section class="comments-section" id="kommentar">
-                <h2>💬 Kommentarer & Frågor</h2>
-                <script src="https://giscus.app/client.js"
-                        data-repo="epi-kurios/BBV-2026"
-                        data-repo-id="R_kgDOTQ7M4A"
-                        data-category="General"
-                        data-category-id="DIC_kwDOTQ7M4M4DAuMx"
-                        data-mapping="url"
-                        data-strict="0"
-                        data-reactions-enabled="1"
-                        data-emit-metadata="0"
-                        data-input-position="bottom"
-                        data-theme="noborder_light"
-                        data-lang="sv"
-                        crossorigin="anonymous"
-                        async>
-                </script>
+            <!-- Kontakt -->
+            <section class="contact-section">
+                <h3>💬 Frågor & Diskussioner</h3>
+                <p>Kontakta arrangören för att gå med i vår Messenger-grupp där vi diskuterar lopp, delar bilder och svarar på frågor!</p>
             </section>
 
             <footer>
