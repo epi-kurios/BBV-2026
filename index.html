@@ -355,6 +355,24 @@
             opacity: 0.8;
         }
 
+        /* Comments section */
+        .comments-section {
+            margin: 35px 0 25px 0;
+            padding: 25px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(45, 74, 62, 0.08);
+        }
+
+        .comments-section h2 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--forest-dark);
+            margin-bottom: 20px;
+            text-align: center;
+            letter-spacing: 1px;
+        }
+
         /* Footer */
         footer {
             margin-top: 30px;
@@ -552,8 +570,27 @@
                 <div class="link-buttons">
                     <a href="#anmalan" class="link-btn">Anmäl dig här</a>
                     <a href="#bilder" class="link-btn secondary">Ladda upp bilder</a>
-                    <a href="#kommentar" class="link-btn secondary">Kommentera</a>
                 </div>
+            </section>
+
+            <!-- Kommentarer -->
+            <section class="comments-section" id="kommentar">
+                <h2>💬 Kommentarer & Frågor</h2>
+                <script src="https://giscus.app/client.js"
+                        data-repo="epi-kurios/BBV-2026"
+                        data-repo-id="R_kgDOTQ7M4A"
+                        data-category="General"
+                        data-category-id="DIC_kwDOTQ7M4M4DAuMx"
+                        data-mapping="url"
+                        data-strict="0"
+                        data-reactions-enabled="1"
+                        data-emit-metadata="0"
+                        data-input-position="bottom"
+                        data-theme="preferred_color_scheme"
+                        data-lang="sv"
+                        crossorigin="anonymous"
+                        async>
+                </script>
             </section>
 
             <footer>
