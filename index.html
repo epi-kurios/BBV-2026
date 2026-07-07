@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blixtbäckvarvet 2026</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+
+        :root {
+            --forest-dark: #2d4a3e;
+            --forest-green: #4a7c59;
+            --sage-green: #7fa891;
+            --mist-gray: #b8c5bd;
+            --stone-gray: #525252;
+            --paper-white: #fafaf8;
+            --off-white: #f5f5f0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #e8ede9 0%, #f5f5f0 100%);
+            color: var(--forest-dark);
+            padding: 40px 20px;
+            position: relative;
+        }
+
+        /* A4 Page Container */
+        .page {
+            position: relative;
+            width: 210mm;
+            min-height: 297mm;
+            margin: 0 auto;
+            background: var(--paper-white);
+            box-shadow: 0 20px 60px rgba(45, 74, 62, 0.15);
+            overflow: hidden;
+        }
+
+        /* Subtle watermark logo */
+        .page::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-2deg);
+            width: 35%;
+            height: 35%;
+            background-image: url('image-5.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            opacity: 0.025;
+            z-index: 0;
+        }
+
+        .content {
+            position: relative;
+            z-index: 1;
+            padding: 45mm 20mm 25mm 20mm;
+        }
+
+        /* Modern Hero Section */
+        header {
+            text-align: center;
+            margin-bottom: 35px;
+            position: relative;
+        }
+
+        .logo-wrapper {
+            position: relative;
+            margin: -45mm -20mm 0 -20mm;
+            padding: 40px 20mm 10px 20mm;
+            background: linear-gradient(180deg, rgba(245, 245, 240, 0.95), rgba(250, 250, 248, 0));
+        }
+
+        .logo-container {
+            max-width: 100%;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .logo-container img {
+            width: 100%;
+            height: auto;
+            opacity: 0.25;
+            filter: grayscale(10%);
+        }
+
+        .accent-line {
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--forest-green), var(--sage-green));
+            margin: 10px auto 15px auto;
+            border-radius: 2px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 12px;
+            color: var(--forest-dark);
+            line-height: 1.2;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            font-weight: 300;
+            letter-spacing: 4px;
+            color: var(--forest-green);
+            text-transform: uppercase;
+        }
+
+        /* Info box */
+        .info-box {
+            background: linear-gradient(135deg, rgba(74, 124, 89, 0.08), rgba(127, 168, 145, 0.05));
+            border: 2px solid var(--mist-gray);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .info-box h2 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--forest-green);
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .info-box p {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: var(--stone-gray);
+        }
+
+        .info-box .highlight {
+            color: var(--forest-dark);
+            font-weight: 600;
+        }
+
+        /* Starttider tabell */
+        .starttider-section {
+            margin-bottom: 35px;
+        }
+
+        .starttider-section h2 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--forest-dark);
+            margin-bottom: 15px;
+            text-align: center;
+            letter-spacing: 1px;
+        }
+
+        .starttider-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 15px;
+            font-size: 0.85rem;
+        }
+
+        .starttider-table th {
+            background: var(--forest-green);
+            color: white;
+            padding: 10px;
+            text-align: left;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+        }
+
+        .starttider-table td {
+            padding: 10px;
+            border-bottom: 1px solid var(--mist-gray);
+        }
+
+        .starttider-table tr:hover {
+            background: rgba(74, 124, 89, 0.05);
+        }
+
+        .preliminary-note {
+            font-size: 0.75rem;
+            font-style: italic;
+            color: var(--stone-gray);
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        /* Image gallery */
+        .image-gallery {
+            margin: 35px 0;
+        }
+
+        .image-gallery h2 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--forest-dark);
+            margin-bottom: 20px;
+            text-align: center;
+            letter-spacing: 1px;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.02);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.7));
+            color: white;
+            padding: 8px;
+            font-size: 0.7rem;
+            text-align: center;
+        }
+
+        /* Language versions */
+        main {
+            display: grid;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .version-section {
+            position: relative;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            border-left: 4px solid var(--forest-green);
+            box-shadow: 0 2px 8px rgba(45, 74, 62, 0.08);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .version-section:hover {
+            transform: translateX(3px);
+            box-shadow: 0 4px 16px rgba(45, 74, 62, 0.12);
+        }
+
+        .version-section:nth-child(1) {
+            border-left-color: var(--forest-dark);
+        }
+
+        .version-section:nth-child(3) {
+            border-left-color: var(--sage-green);
+        }
+
+        .version-badge {
+            display: inline-flex;
+            font-size: 0.6rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            background: linear-gradient(135deg, var(--forest-green), var(--sage-green));
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            margin-bottom: 12px;
+        }
+
+        .version-section:nth-child(1) .version-badge {
+            background: linear-gradient(135deg, var(--forest-dark), var(--forest-green));
+        }
+
+        .quote-text {
+            font-size: 0.95rem;
+            font-weight: 400;
+            font-style: italic;
+            color: var(--stone-gray);
+            font-family: 'Georgia', serif;
+            line-height: 1.7;
+        }
+
+        /* Links section */
+        .links-section {
+            background: var(--off-white);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .links-section h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--forest-dark);
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+
+        .link-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .link-btn {
+            display: inline-block;
+            padding: 8px 16px;
+            background: linear-gradient(135deg, var(--forest-green), var(--sage-green));
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(74, 124, 89, 0.3);
+        }
+
+        .link-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(74, 124, 89, 0.4);
+        }
+
+        .link-btn.secondary {
+            background: linear-gradient(135deg, var(--mist-gray), var(--sage-green));
+            font-size: 0.7rem;
+            padding: 6px 12px;
+            opacity: 0.8;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 30px;
+            padding-top: 20px;
+            text-align: center;
+            border-top: 2px solid var(--off-white);
+        }
+
+        .footer-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 1.5px;
+            color: var(--mist-gray);
+            text-transform: uppercase;
+        }
+
+        .footer-dot {
+            width: 3px;
+            height: 3px;
+            background: var(--sage-green);
+            border-radius: 50%;
+        }
+
+        /* Print optimization */
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+
+            .page {
+                width: 100%;
+                min-height: auto;
+                margin: 0;
+                box-shadow: none;
+            }
+
+            .page::before {
+                opacity: 0.02;
+            }
+
+            .links-section {
+                display: none;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media screen and (max-width: 900px) {
+            .page {
+                width: 100%;
+                min-height: auto;
+            }
+
+            .content {
+                padding: 40px 20px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="page">
+        <div class="content">
+            <header>
+                <div class="logo-wrapper">
+                    <div class="logo-container">
+                        <img src="image-5.png" alt="Blixtbäckvarvet Logotyp">
+                    </div>
+                </div>
+                <div class="accent-line"></div>
+                <h1>Välkommen till<br>Blixtbäckvarvet</h1>
+                <div class="subtitle">Årgång 2026</div>
+            </header>
+
+            <!-- Allmän info -->
+            <div class="info-box">
+                <h2>📍 Viktig Information</h2>
+                <p>Starttider är <span class="highlight">preliminära</span> och uppdateras senast <span class="highlight">3 dagar före loppet</span>.<br>
+                Håll utkik efter uppdateringar via mail eller här på sidan!</p>
+            </div>
+
+            <!-- Preliminära starttider -->
+            <section class="starttider-section">
+                <h2>🏃 Preliminära Starttider</h2>
+                <table class="starttider-table">
+                    <thead>
+                        <tr>
+                            <th>Klass</th>
+                            <th>Sträcka</th>
+                            <th>Tempo</th>
+                            <th>Starttid</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Gå 11,3 km</td>
+                            <td>11,3 km</td>
+                            <td>ca 11:00-12:00/km</td>
+                            <td>12:55</td>
+                        </tr>
+                        <tr>
+                            <td>Springa långsam</td>
+                            <td>11,3 km</td>
+                            <td>ca 6:45/km</td>
+                            <td>13:44</td>
+                        </tr>
+                        <tr>
+                            <td>Springa snabb</td>
+                            <td>11,3 km</td>
+                            <td>ca 6:00/km</td>
+                            <td>13:52</td>
+                        </tr>
+                        <tr>
+                            <td>Gå 5,5 km</td>
+                            <td>5,5 km</td>
+                            <td>ca 11:00-12:00/km</td>
+                            <td>13:54</td>
+                        </tr>
+                        <tr>
+                            <td>Springa långsam</td>
+                            <td>5,5 km</td>
+                            <td>ca 6:45/km</td>
+                            <td>14:23</td>
+                        </tr>
+                        <tr>
+                            <td>Springa snabb</td>
+                            <td>5,5 km</td>
+                            <td>ca 6:00/km</td>
+                            <td>14:27</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p class="preliminary-note">* Starttiderna är preliminära och anpassade för kuperad terrängbana.</p>
+            </section>
+
+            <!-- Bildgalleri -->
+            <section class="image-gallery">
+                <h2>📸 Från Tidigare Lopp</h2>
+                <div class="gallery-grid">
+                    <div class="gallery-item">
+                        <img src="image-3.png" alt="Start och mål">
+                        <div class="gallery-caption">Start & Mål</div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="image-2.png" alt="Sjön">
+                        <div class="gallery-caption">Vid Sjön</div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="image.png" alt="Tunnbrödbakning">
+                        <div class="gallery-caption">Tunnbrödbakning</div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="image-1.png" alt="Karta">
+                        <div class="gallery-caption">Bansträckning 10,6 km</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Språkversioner -->
+            <main>
+                <section class="version-section">
+                    <span class="version-badge">Jämsk-svenska</span>
+                    <p class="quote-text">Välkommen te årets laup! Där du kan gá, vandra, laup ell ler rucka genom skog, öve stokke å bejke te en sjö! Å efter målgång blir e gille i en gammal stuggu, med baking av tunnbrö å nåt te dricka – flask, öl ell ler vatten-vín!</p>
+                </section>
+
+                <section class="version-section">
+                    <span class="version-badge">Engelska (Nordiska rötter)</span>
+                    <p class="quote-text">Welcome to this year's lope! Where you can walk, wander, lope or ruck through the woods, over stocks and becks to a lake! And after crossing the line, there's a gild in an old stuga, with baking of thin-bread and somewhat to drink – flask, ale or water-wine!</p>
+                </section>
+
+                <section class="version-section">
+                    <span class="version-badge">Modern Innerstads-stockholmska</span>
+                    <p class="quote-text">Alltså, välkomna till årets maxade event! Där du kan softa, powerwalka, köra trail eller rucking genom terrängen, över stock och sten hela vägen till sjön! Efter målgång blir det episkt efterhäng i en urmysig stuga, med färskt tunnbrödsbak och grym dryck – skön läsk, hantverksöl eller schysst naturvin!</p>
+                </section>
+            </main>
+
+            <!-- Links (Nedtonade) -->
+            <section class="links-section">
+                <h3>Anmälan & Mer</h3>
+                <div class="link-buttons">
+                    <a href="#anmalan" class="link-btn">Anmäl dig här</a>
+                    <a href="#bilder" class="link-btn secondary">Ladda upp bilder</a>
+                    <a href="#kommentar" class="link-btn secondary">Kommentera</a>
+                </div>
+            </section>
+
+            <footer>
+                <div class="footer-content">
+                    <span>Skog</span>
+                    <div class="footer-dot"></div>
+                    <span>Berg</span>
+                    <div class="footer-dot"></div>
+                    <span>Vatten</span>
+                    <div class="footer-dot"></div>
+                    <span>Blixtbäckvarvet 2026</span>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+</body>
+</html>
