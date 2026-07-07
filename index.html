@@ -391,6 +391,127 @@
             min-height: 1691px;
         }
 
+        /* Resultat section */
+        .resultat-section {
+            margin: 40px 0;
+        }
+
+        .resultat-section h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--forest-dark);
+            margin-bottom: 15px;
+            text-align: center;
+            letter-spacing: 1px;
+        }
+
+        .resultat-intro {
+            font-size: 0.95rem;
+            color: var(--stone-gray);
+            text-align: center;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        .category-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            margin-bottom: 25px;
+        }
+
+        .filter-btn {
+            padding: 8px 16px;
+            background: white;
+            border: 2px solid var(--mist-gray);
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--stone-gray);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: none;
+            letter-spacing: 0.5px;
+        }
+
+        .filter-btn:hover {
+            border-color: var(--sage-green);
+            color: var(--forest-green);
+        }
+
+        .filter-btn.active {
+            background: linear-gradient(135deg, var(--forest-green), var(--sage-green));
+            color: white;
+            border-color: var(--forest-green);
+        }
+
+        .loading-message,
+        .empty-message {
+            text-align: center;
+            padding: 40px 20px;
+            font-size: 1.1rem;
+            color: var(--mist-gray);
+        }
+
+        .resultat-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(45, 74, 62, 0.08);
+            margin-bottom: 15px;
+        }
+
+        .resultat-table thead {
+            background: var(--forest-green);
+            color: white;
+        }
+
+        .resultat-table th {
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .resultat-table td {
+            padding: 12px;
+            border-bottom: 1px solid var(--off-white);
+            font-size: 0.9rem;
+        }
+
+        .resultat-table tr:hover {
+            background: rgba(107, 142, 107, 0.05);
+        }
+
+        .resultat-table .placering {
+            font-weight: 700;
+            color: var(--forest-green);
+            width: 60px;
+        }
+
+        .resultat-table .tid {
+            font-weight: 600;
+            color: var(--forest-dark);
+        }
+
+        .category-group {
+            margin-bottom: 35px;
+        }
+
+        .category-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--forest-dark);
+            margin-bottom: 15px;
+            padding-left: 5px;
+            border-left: 4px solid var(--sage-green);
+        }
+
         /* Contact section */
         .contact-section {
             margin: 35px 0 25px 0;
@@ -615,6 +736,32 @@
                 </div>
             </section>
 
+            <!-- Resultat -->
+            <section class="resultat-section" id="resultat">
+                <h2>🏆 Resultat Blixtbäckvarvet 2026</h2>
+                <p class="resultat-intro">Resultaten uppdateras automatiskt från vår databas. Välj kategori för att se placeringar.</p>
+                
+                <div class="category-filters">
+                    <button class="filter-btn active" data-filter="all">Alla</button>
+                    <button class="filter-btn" data-filter="Gå 11,3 km">Gå 11,3 km</button>
+                    <button class="filter-btn" data-filter="Springa långsam 11,3 km">Springa långsam 11,3 km</button>
+                    <button class="filter-btn" data-filter="Springa snabb 11,3 km">Springa snabb 11,3 km</button>
+                    <button class="filter-btn" data-filter="Gå 5,5 km">Gå 5,5 km</button>
+                    <button class="filter-btn" data-filter="Springa långsam 5,5 km">Springa långsam 5,5 km</button>
+                    <button class="filter-btn" data-filter="Springa snabb 5,5 km">Springa snabb 5,5 km</button>
+                </div>
+
+                <div id="resultat-loading" class="loading-message">
+                    <p>🏋️ Laddar resultat...</p>
+                </div>
+
+                <div id="resultat-empty" class="empty-message" style="display: none;">
+                    <p>📅 Resultaten publiceras efter loppet!</p>
+                </div>
+
+                <div id="resultat-container"></div>
+            </section>
+
             <!-- Kontakt -->
             <section class="contact-section">
                 <h3>💬 Frågor & Diskussioner</h3>
@@ -634,6 +781,166 @@
             </footer>
         </div>
     </div>
+
+<script>
+// Hämta och visa resultat från Google Sheets
+const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRrDPuKAhbO5NLiuUlIj6WkC6blo9GN1yW1BCodAkgAHCTlSs4BT-n2d_bC4KH3GlNS0aiSR1_Twzuv/pub?gid=2036673078&output=csv';
+
+let allResults = [];
+let currentFilter = 'all';
+
+// Hämta data när sidan laddas
+fetch(CSV_URL)
+    .then(response => response.text())
+    .then(csvText => {
+        allResults = parseCSV(csvText);
+        
+        if (allResults.length === 0 || !hasResults(allResults)) {
+            document.getElementById('resultat-loading').style.display = 'none';
+            document.getElementById('resultat-empty').style.display = 'block';
+        } else {
+            document.getElementById('resultat-loading').style.display = 'none';
+            displayResults(allResults, 'all');
+        }
+    })
+    .catch(error => {
+        console.error('Fel vid hämtning av resultat:', error);
+        document.getElementById('resultat-loading').innerHTML = '<p>⚠️ Kunde inte ladda resultat. Försök igen senare.</p>';
+    });
+
+// Parsa CSV-data
+function parseCSV(csvText) {
+    const lines = csvText.split('\n');
+    const headers = lines[0].split(',').map(h => h.trim().replace(/"/g, ''));
+    const results = [];
+    
+    // Hitta index för relevanta kolumner
+    const nameIndex = headers.findIndex(h => h.toLowerCase().includes('namn'));
+    const distanceIndex = headers.findIndex(h => h.toLowerCase().includes('distans'));
+    const categoryIndex = headers.findIndex(h => h.toLowerCase().includes('tempo') || h.toLowerCase().includes('kategori'));
+    const timeIndex = headers.findIndex(h => h.toLowerCase().includes('sluttid') || h.toLowerCase().includes('tid'));
+    
+    for (let i = 1; i < lines.length; i++) {
+        if (!lines[i].trim()) continue;
+        
+        const values = lines[i].split(',').map(v => v.trim().replace(/"/g, ''));
+        
+        const name = nameIndex >= 0 ? values[nameIndex] : '';
+        const distance = distanceIndex >= 0 ? values[distanceIndex] : '';
+        const category = categoryIndex >= 0 ? values[categoryIndex] : '';
+        const time = timeIndex >= 0 ? values[timeIndex] : '';
+        
+        if (name && time) {
+            const fullCategory = `${category} ${distance}`.trim();
+            results.push({
+                name,
+                distance,
+                category,
+                fullCategory,
+                time,
+                timeSeconds: parseTime(time)
+            });
+        }
+    }
+    
+    return results;
+}
+
+// Konvertera tid till sekunder för sortering
+function parseTime(timeStr) {
+    if (!timeStr) return 999999;
+    const parts = timeStr.split(':');
+    if (parts.length === 3) {
+        return parseInt(parts[0]) * 3600 + parseInt(parts[1]) * 60 + parseInt(parts[2]);
+    } else if (parts.length === 2) {
+        return parseInt(parts[0]) * 60 + parseInt(parts[1]);
+    }
+    return 999999;
+}
+
+// Kontrollera om det finns några resultat med tid
+function hasResults(results) {
+    return results.some(r => r.time && r.time !== '');
+}
+
+// Visa resultat
+function displayResults(results, filter) {
+    const container = document.getElementById('resultat-container');
+    container.innerHTML = '';
+    
+    let filtered = results;
+    if (filter !== 'all') {
+        filtered = results.filter(r => r.fullCategory.includes(filter));
+    }
+    
+    if (filtered.length === 0) {
+        container.innerHTML = '<p style="text-align: center; padding: 20px; color: var(--mist-gray);">Inga resultat i denna kategori än.</p>';
+        return;
+    }
+    
+    // Gruppera per kategori
+    const categories = {};
+    filtered.forEach(result => {
+        if (!categories[result.fullCategory]) {
+            categories[result.fullCategory] = [];
+        }
+        categories[result.fullCategory].push(result);
+    });
+    
+    // Visa varje kategori
+    Object.keys(categories).sort().forEach(cat => {
+        const group = document.createElement('div');
+        group.className = 'category-group';
+        
+        const title = document.createElement('h3');
+        title.className = 'category-title';
+        title.textContent = cat;
+        group.appendChild(title);
+        
+        const table = document.createElement('table');
+        table.className = 'resultat-table';
+        
+        table.innerHTML = `
+            <thead>
+                <tr>
+                    <th>Namn</th>
+                    <th>Sluttid</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        `;
+        
+        const tbody = table.querySelector('tbody');
+        
+        // Sortera efter tid
+        const sorted = categories[cat].sort((a, b) => a.timeSeconds - b.timeSeconds);
+        
+        sorted.forEach((result, index) => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${result.name}</td>
+                <td class="tid">${result.time}</td>
+            `;
+            tbody.appendChild(row);
+        });
+        
+        group.appendChild(table);
+        container.appendChild(group);
+    });
+}
+
+// Filterhantering
+document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        
+        const filter = btn.dataset.filter;
+        currentFilter = filter;
+        displayResults(allResults, filter);
+    });
+});
+</script>
 
 </body>
 </html>
