@@ -391,6 +391,115 @@
             min-height: 1691px;
         }
 
+        /* Karta section */
+        .karta-section {
+            margin: 40px 0;
+        }
+
+        .karta-section h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--forest-dark);
+            margin-bottom: 15px;
+            text-align: center;
+            letter-spacing: 1px;
+        }
+
+        .karta-section h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--forest-dark);
+            margin: 30px 0 20px 0;
+            text-align: center;
+        }
+
+        .karta-intro {
+            font-size: 0.95rem;
+            color: var(--stone-gray);
+            text-align: center;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        .map-container {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 16px rgba(45, 74, 62, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 450px;
+            border: none;
+        }
+
+        .map-links {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .map-link-btn {
+            display: inline-block;
+            padding: 10px 24px;
+            background: linear-gradient(135deg, var(--forest-green), var(--sage-green));
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(74, 124, 89, 0.3);
+        }
+
+        .map-link-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(74, 124, 89, 0.4);
+        }
+
+        .karta-images {
+            margin-top: 30px;
+        }
+
+        .karta-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .karta-item {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(45, 74, 62, 0.08);
+        }
+
+        .karta-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .karta-caption {
+            padding: 12px;
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--stone-gray);
+            background: var(--off-white);
+        }
+
+        @media (max-width: 768px) {
+            .karta-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .map-container iframe {
+                height: 300px;
+            }
+        }
+
         /* Resultat section */
         .resultat-section {
             margin: 40px 0;
@@ -733,6 +842,36 @@
                 <p class="anmalan-intro">Anmäl dig genom att fylla i formuläret nedan. Dina preliminära starttider uppdateras 3 dagar före loppet.</p>
                 <div class="form-container">
                     <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSf5Hfx3vCAL-C9vK7OReQQSGSg-SFzYwQy1-9ULP5hUGf8LzQ/viewform?embedded=true" width="100%" height="1691" frameborder="0" marginheight="0" marginwidth="0">Läser in …</iframe>
+                </div>
+            </section>
+
+            <!-- Karta -->
+            <section class="karta-section" id="karta">
+                <h2>🗺️ Hitta till Blixtbäckvarvet</h2>
+                <p class="karta-intro">Start och mål vid Sörbygden. Parkering finns på plats.</p>
+                
+                <div class="map-container">
+                    <iframe src="https://www.google.com/maps?q=https://maps.app.goo.gl/M1gjPdubhG4dghXk9&output=embed" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+                
+                <div class="map-links">
+                    <a href="https://maps.app.goo.gl/M1gjPdubhG4dghXk9" target="_blank" class="map-link-btn">
+                        📍 Öppna i Google Maps
+                    </a>
+                </div>
+
+                <div class="karta-images">
+                    <h3>Bansträckning</h3>
+                    <div class="karta-grid">
+                        <div class="karta-item">
+                            <img src="image-1.png" alt="Bansträckning 10,6 km">
+                            <p class="karta-caption">Oversikt - 10,6 km runt Sörbygden</p>
+                        </div>
+                        <div class="karta-item">
+                            <img src="image-6.png" alt="Detaljkarta">
+                            <p class="karta-caption">Detaljkarta med terräng</p>
+                        </div>
+                    </div>
                 </div>
             </section>
 
